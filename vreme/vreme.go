@@ -22,11 +22,11 @@ func NastaviTemp(min float64, max float64, st int) {
 
 var postaje = make(map[string]Postaja)
 
-func DodajPostajo(oznaka string, ime string, kraj string, meritve []float64) {
+func DodajPostajo(oznaka string, ime string, kraj string) {
 	postaje[oznaka] = Postaja{
 		ime:     ime,
 		kraj:    kraj,
-		meritve: meritve,
+		meritve: []float64{},
 	}
 }
 
