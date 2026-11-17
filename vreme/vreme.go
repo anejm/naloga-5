@@ -8,6 +8,18 @@ type Postaja struct {
 	meritve []float64
 }
 
+var (
+	minTemp   float64 = -50
+	maxTemp   float64 = 50
+	stMeritev int     = 3
+)
+
+func NastaviTemp(min float64, max float64, st int) {
+	minTemp = min
+	maxTemp = max
+	stMeritev = st
+}
+
 var postaje = make(map[string]Postaja)
 
 func DodajPostajo(oznaka string, ime string, kraj string, meritve []float64) {
@@ -18,8 +30,8 @@ func DodajPostajo(oznaka string, ime string, kraj string, meritve []float64) {
 	}
 }
 
-func DodajMeritev(postaje map[string]Postaja, oznaka string, temperatura float64) {
-	if temperatura < -50.0 || temperatura > 50.0 {
+func DodajMeritev(oznaka string, temperatura float64) {
+	if temperatura < minTemp || temperatura > maxTemp {
 		fmt.Println("temperatura izven meja")
 		return
 	}
@@ -34,7 +46,7 @@ func DodajMeritev(postaje map[string]Postaja, oznaka string, temperatura float64
 	postaje[oznaka] = postaja
 }
 
-func statistika(postaje map[string]Postaja, oznaka string) (najnizja, najvisja, povprecna float64, ok bool) {
+func statistika(oznaka string) (najnizja, najvisja, povprecna float64, ok bool) {
 	ok = true
 	postaja, obstaja := postaje[oznaka]
 	if !obstaja {
@@ -42,7 +54,7 @@ func statistika(postaje map[string]Postaja, oznaka string) (najnizja, najvisja, 
 		return
 	}
 
-	if len(postaja.meritve) < 3 {
+	if len(postaja.meritve) < stMeritev {
 		ok = false
 		return
 	}
@@ -66,16 +78,16 @@ func statistika(postaje map[string]Postaja, oznaka string) (najnizja, najvisja, 
 	return
 }
 
-func IzpisMeritev(postaje map[string]Postaja) {
+func IzpisMeritev() {
 	fmt.Println("MERITVE:")
 	for o, p := range postaje {
 		fmt.Printf("%s - %s (%s): %v\n", o, p.ime, p.kraj, p.meritve)
 	}
 }
 
-func IzpisPorocila(postaje map[string]Postaja) {
+func IzpisPorocila() {
 	for oznaka, p := range postaje {
-		najnizja, najvisja, povprecna, ok := statistika(postaje, oznaka)
+		najnizja, najvisja, povprecna, ok := statistika(oznaka)
 		fmt.Printf("%s: ", p.ime)
 		if !ok {
 			fmt.Println("premalo meritev")
