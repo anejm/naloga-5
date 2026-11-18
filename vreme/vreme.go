@@ -1,11 +1,11 @@
-// Package vreme provides the functionality to manage weather stations and
+// Package vreme provides the functionality to manage weather stations
 //
 // The package implements a map of weather stations to monitor each created station. Each station has
-// a name, place and an array of measurments. The stations are added to the map using oznaka.
+// a name, place and an array of measurements. The stations are added to the map using oznaka.
 // The package allows users to add measurements to each station.
 // The user can set the minimum and maximum temperature that the sensors can track through flags, you
-// can also set the minimum number of measurements for the station to be include in the statistical report.
-// There are also functions that allow the user to track the monitored stations.
+// can also set the minimum number of measurements for the station to be included in the statistical report.
+// There are also functions that allow tracking of the monitored stations.
 //
 // Example usage:
 //	vreme.DodajPostajo("MB01", "Maribor Tabor", "Maribor")
